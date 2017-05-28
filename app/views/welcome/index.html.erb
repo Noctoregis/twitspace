@@ -1,0 +1,24 @@
+<body>
+      <%if @result_type == "recent"%>
+        <%= link_to "Visualiser les photos les plus populaires", welcome_index_path(result_type: "popular")%>
+      <%else%>
+        <%= link_to "Visualiser les photos les plus récentes", welcome_index_path(result_type: "recent")%>
+      <%end%>
+  <div class="mdiv">
+      <% @tweet_news.each_with_index do |t, i|%>
+        <% if i.modulo(3) == 0%>
+          <%if i > 0%>
+            </tr>
+          <%end%>
+          <tr>
+          <%i = i + 1%>
+        <%end%>
+        <%if t.media.present?%>
+          <td>
+            <%= link_to image_tag(t.media[0]["media_url"], width:"320px", height:"400px"), t.media[0]["expanded_url"].to_s, :popup => ['dialog name','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes']%>
+          </td>
+        <% end%>
+      <% end%>
+    </table>
+  </div>
+</body>
